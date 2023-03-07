@@ -1,0 +1,52 @@
+Future plans:
+
+1. More checks for inputs on login and signup pages.
+    DONE - Checking passwords for strength
+    - Checking emails for validity
+    DONE - Checking for integers for wallet
+    - Checking for sql injection/other security concerns in all inputs
+    
+2. Create pop-ups for when the checks in the above input fields are not met.
+    - Incorrect passwords, invalid/used emails, etc
+    - Maybe a pop-up for when you run out of money
+        - This could allow you to navigate to the add funds page. (See item 3)
+
+3. Create add funds page, could be a green plus button up near the wallet display.
+    DONE - could just be a fake thing were you have fake credit card info and then you just type
+        in a number and it's added to your wallet
+    DONE - just need to make the submit button actually do something now
+    
+4. Double Down Button.
+    - Add the double down button beside hit button
+    - If clicked and bet_placed (and whatever else)
+        - Double the wager, hit once, and then playerDone = True
+
+5. Split button.
+    - If both first cards are doubles, split button is there
+    - If clicked, splits them both into seperate hands (can't do this yet, see item 6)
+
+6. Multiple hands. (biggest thing rn is how to display this nicely)
+    - allow up to 3 hands, and each one can split once (player.hands[6])
+    - need to go back basically everywhere that calls player1.hands[0]
+        - it will need to be player1.hands[i], and each of the functions need to take i
+            - then might have to make player turn as a function, and call it on each hand.
+
+FOR ITEMS 5 AND 6: 
+    - when a hand is split, put the new hand at i + 3 (so if on i=0, store at i=3)
+        for i in range(3):
+            turn(i)
+            if player.hands[i+3] isn't null:
+                turn(i+3)
+
+7. Insurance. 
+    - implementing insurance
+        - if dealer shows ace, can pay so if it is blackjack you don't lose.
+
+8. BUG
+    - When you place a bet and see your cards, you can just close the app 
+     and you wont lose the wager. No penalty
+        - Fix this maybe by adding a pop up that says, are you sure you want to 
+         ditch your wager, it will be lost. 
+            - Only if a wager is currently placed
+            - There would be a yes, and a canel, if yes, take the wager away and update
+    !!! For now, i just made it so you lose the money. Pop-up would be good though        
